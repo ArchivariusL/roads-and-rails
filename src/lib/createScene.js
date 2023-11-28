@@ -16,7 +16,12 @@ import * as wgl from 'w-gl';
 
 export default function createScene(canvas) {
   let scene = wgl.createScene(canvas);
-  let lastLineColor = config.getDefaultLineColor();
+  let lastLineColor = config.getRoadColor();
+  let lastRailColor = config.getRailColor();
+  let lastNarrowColor = config.getNarrowColor();
+  let lastSubwayColor = config.getSubwayColor();
+  let lastTramColor = config.getTramColor();
+  
   scene.on('transform', triggerTransform);
   scene.on('append-child', triggerAdd);
   scene.on('remove-child', triggerRemove);

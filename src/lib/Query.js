@@ -18,6 +18,12 @@ export default class Query {
    */
   static Road = 'way[highway]';
 
+  // TRAINS
+  static Tram = 'way[railway=tram]'
+  static Subway = 'way[railway~"^(monorail|subway)"]'
+  static Train = 'way[railway~"^(rail|light_rail)"][service!~"^(yard|siding|spur)"]'
+  static Narrow = 'way[railway=narrow_gauge]'
+
   /**
    * Reduced set of roads
    */

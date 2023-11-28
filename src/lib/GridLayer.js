@@ -32,7 +32,7 @@ export default class GridLayer {
   }
 
   constructor() {
-    this._color = config.getDefaultLineColor();
+    this._color = config.getRoadColor();
     this.grid = null;
     this.lines = null;
     this.scene = null;

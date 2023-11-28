@@ -10,8 +10,20 @@ export default {
   // So, using S3
   areaServer: 'https://city-roads.s3-us-west-2.amazonaws.com/nov-02-2020',
 
-  getDefaultLineColor() {
-    return tinycolor('rgba(26, 26, 26, 0.8)');
+  getRoadColor() {
+    return tinycolor('rgba(120, 120, 120, 0.5)');
+  },
+  getRailColor() {
+    return tinycolor('rgba(50, 120, 0, 0.5)');
+  },
+  getNarrowColor() {
+    return tinycolor('rgba(80, 230, 60, 0.3)');
+  },
+  getSubwayColor() {
+    return tinycolor('rgba(20, 0, 160, 0.5)');
+  },
+  getTramColor() {
+    return tinycolor('rgba(230, 0, 160, 0.5)');
   },
   getLabelColor() {
     return tinycolor('#161616');
