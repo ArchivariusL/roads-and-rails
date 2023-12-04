@@ -40,7 +40,6 @@
     It could be very busy at the moment processing other requests. <br/><br/> Please bookmark this website and <a href='#' @click.prevent="retry">try again</a> later?</div>
     <div class='error-links'>
       <a href='https://twitter.com/anvaka/status/1218971717734789120' title='see what it supposed to do' target="_blank">see how it should have worked</a>
-      <a :href='getBugReportURL(error)' :title='"report error: " + error' target='_blank'>report this bug</a>
     </div>
   </div>
   <div v-if='loading' class='loading message shadow'>
@@ -152,17 +151,6 @@ export default {
         });
     },
 
-    getBugReportURL(error) {
-      let title = encodeURIComponent('OSM Error');
-      let body = '';
-      if (error) {
-        body = 'Hello, an error occurred on the website:\n\n```\n' +
-          error.toString() + '\n```\n\n Can you please help?';
-      }
-
-      return `https://github.com/anvaka/city-roads/issues/new?title=${title}&body=${encodeURIComponent(body)}`
-    },
-
     updateProgress(status) {
       this.stillLoading = 0;
       clearInterval(this.notifyStillLoading);
@@ -210,21 +198,8 @@ export default {
     },
 
     checkCache(suggestion) {
-      this.loading = 'Checking cache...'
-      let areaId = suggestion.areaId;
 
-      return request(config.areaServer + '/' + areaId + '.pbf', {
-        progress: this.generateNewProgressToken(),
-        responseType: 'arraybuffer'
-      }).then(arrayBuffer => {
-        var byteArray = new Uint8Array(arrayBuffer);
-        return byteArray;
-      }).then(byteArray => {
-        var pbf = new Pbf(byteArray);
-        var obj = place.read(pbf);
-        let grid = Grid.fromPBF(obj)
-        this.$emit('loaded', grid);
-      });
+      return false
     },
 
     useOSM(suggestion) {
@@ -233,7 +208,7 @@ export default {
       // it may take a while to load data. 
       this.restartLoadingMonitor();
       Query.runFromOptions(new LoadOptions({
-        wayFilter: Query.Tram,
+        wayFilter: Query.Road,
         areaId: suggestion.areaId,
         bbox: suggestion.bbox
       }), this.generateNewProgressToken())
@@ -262,6 +237,9 @@ export default {
         clearInterval(this.notifyStillLoading);
         this.stillLoading = 0;
       });
+
+
+
     },
 
     cancelRequest() {

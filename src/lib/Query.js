@@ -16,13 +16,7 @@ export default class Query {
    * This gets anything marked as a highway, which has its own pros and cons.
    * See https://github.com/anvaka/city-roads/issues/20
    */
-  static Road = 'way[highway]';
-
-  // TRAINS
-  static Tram = 'way[railway=tram]'
-  static Subway = 'way[railway~"^(monorail|subway)"]'
-  static Train = 'way[railway~"^(rail|light_rail)"][service!~"^(yard|siding|spur)"]'
-  static Narrow = 'way[railway=narrow_gauge]'
+  static Road = 'way[railway~"^(rail|light_rail|tram|monorail|subway|narrow_gauge)"][service!~"^(yard|siding|spur)"]'
 
   /**
    * Reduced set of roads

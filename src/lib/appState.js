@@ -8,7 +8,7 @@ const queryState = createQueryState({}, {useSearch: true});
  */
 export default {
   isCacheEnabled() {
-    return queryState.get('cache') != 0;
+    return false;
   },
   enableCache() {
     return queryState.unset('cache');
